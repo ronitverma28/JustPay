@@ -17,7 +17,7 @@ public class EntityMapper {
             .id(user.getId())
             .name(user.getName())
             .email(user.getEmail())
-            .role(user.getRole())
+                .role(user.getRole())
             .build();
     }
 

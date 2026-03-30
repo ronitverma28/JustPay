@@ -1,6 +1,6 @@
 package app.wallet.smart_wallet.dto.request;
 
-import com.smartwallet.enums.SplitType;
+import app.wallet.smart_wallet.entity.enums.SplitType;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.NotBlank;

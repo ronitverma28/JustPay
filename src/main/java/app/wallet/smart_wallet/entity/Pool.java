@@ -21,6 +21,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.CreationTimestamp;
 
 @Getter
 @Setter
@@ -40,7 +41,7 @@ public class Pool {
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "created_by", nullable = false)
-    private User createdBy;
+    private User user;
 
     @Builder.Default
     @ManyToMany
@@ -55,13 +56,8 @@ public class Pool {
     private BigDecimal poolBalance;
 
     @Column(nullable = false)
+    @CreationTimestamp
     private LocalDateTime createdAt;
 
-    @PrePersist
-    public void prePersist() {
-        if (poolBalance == null) {
-            poolBalance = BigDecimal.ZERO;
-        }
-        createdAt = LocalDateTime.now();
-    }
+
 }

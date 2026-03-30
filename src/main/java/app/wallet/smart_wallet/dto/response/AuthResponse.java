@@ -1,6 +1,6 @@
 package app.wallet.smart_wallet.dto.response;
 
-import com.smartwallet.enums.Role;
+import app.wallet.smart_wallet.entity.enums.Role;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

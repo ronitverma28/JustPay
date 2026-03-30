@@ -1,7 +1,7 @@
 package app.wallet.smart_wallet.dto.response;
 
-import com.smartwallet.enums.TransactionStatus;
-import com.smartwallet.enums.TransactionType;
+import app.wallet.smart_wallet.entity.enums.TransactionStatus;
+import app.wallet.smart_wallet.entity.enums.TransactionType;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import lombok.AllArgsConstructor;

@@ -1,7 +1,7 @@
 package app.wallet.smart_wallet.dto.response;
 
-import com.smartwallet.enums.ExpenseStatus;
-import com.smartwallet.enums.SplitType;
+import app.wallet.smart_wallet.entity.enums.ExpenseStatus;
+import app.wallet.smart_wallet.entity.enums.SplitType;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;

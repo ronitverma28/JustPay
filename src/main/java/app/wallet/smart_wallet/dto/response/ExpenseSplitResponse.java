@@ -1,6 +1,6 @@
 package app.wallet.smart_wallet.dto.response;
 
-import com.smartwallet.enums.SplitStatus;
+import app.wallet.smart_wallet.entity.enums.SplitStatus;
 import java.math.BigDecimal;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
