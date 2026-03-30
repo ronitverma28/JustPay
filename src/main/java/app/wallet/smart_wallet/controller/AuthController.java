@@ -1,5 +1,6 @@
 package app.wallet.smart_wallet.controller;
 
+import app.wallet.smart_wallet.service.AuthService;
 import com.smartwallet.dto.ApiResponse;
 import com.smartwallet.dto.AuthResponse;
 import com.smartwallet.dto.LoginRequest;

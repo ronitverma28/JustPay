@@ -1,7 +1,7 @@
 package app.wallet.smart_wallet.security;
 
-import com.smartwallet.entity.User;
-import com.smartwallet.repository.UserRepository;
+import app.wallet.smart_wallet.entity.User;
+import app.wallet.smart_wallet.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

@@ -1,8 +1,8 @@
 package app.wallet.smart_wallet.repository;
 
-import com.smartwallet.entity.Transaction;
-import com.smartwallet.enums.TransactionStatus;
-import com.smartwallet.enums.TransactionType;
+import app.wallet.smart_wallet.entity.Transaction;
+import app.wallet.smart_wallet.entity.enums.TransactionStatus;
+import app.wallet.smart_wallet.entity.enums.TransactionType;
 import jakarta.persistence.LockModeType;
 import java.util.List;
 import java.util.Optional;

@@ -1,6 +1,6 @@
 package app.wallet.smart_wallet.repository;
 
-import com.smartwallet.entity.User;
+import app.wallet.smart_wallet.entity.User;
 import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 

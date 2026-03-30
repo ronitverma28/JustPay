@@ -1,6 +1,6 @@
 package app.wallet.smart_wallet.repository;
 
-import com.smartwallet.entity.Expense;
+import app.wallet.smart_wallet.entity.Expense;
 import jakarta.persistence.LockModeType;
 import java.util.List;
 import java.util.Optional;

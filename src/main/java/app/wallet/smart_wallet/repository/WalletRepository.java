@@ -1,6 +1,6 @@
 package app.wallet.smart_wallet.repository;
 
-import com.smartwallet.entity.Wallet;
+import app.wallet.smart_wallet.entity.Wallet;
 import jakarta.persistence.LockModeType;
 import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;

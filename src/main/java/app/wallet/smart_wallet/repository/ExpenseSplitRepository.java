@@ -1,6 +1,6 @@
 package app.wallet.smart_wallet.repository;
 
-import com.smartwallet.entity.ExpenseSplit;
+import app.wallet.smart_wallet.entity.ExpenseSplit;
 import jakarta.persistence.LockModeType;
 import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;

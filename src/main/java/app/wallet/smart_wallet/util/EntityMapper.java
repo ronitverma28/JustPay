@@ -1,27 +1,19 @@
 package app.wallet.smart_wallet.util;
 
-import com.smartwallet.dto.ExpenseResponse;
-import com.smartwallet.dto.ExpenseSplitResponse;
-import com.smartwallet.dto.PoolResponse;
-import com.smartwallet.dto.TransactionResponse;
-import com.smartwallet.dto.UserSummaryDto;
-import com.smartwallet.dto.WalletResponse;
-import com.smartwallet.entity.Expense;
-import com.smartwallet.entity.ExpenseSplit;
-import com.smartwallet.entity.Pool;
-import com.smartwallet.entity.Transaction;
-import com.smartwallet.entity.User;
-import com.smartwallet.entity.Wallet;
+import app.wallet.smart_wallet.dto.response.*;
+
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import app.wallet.smart_wallet.entity.*;
 import lombok.experimental.UtilityClass;
 
 @UtilityClass
 public class EntityMapper {
 
-    public static UserSummaryDto toUserSummary(User user) {
-        return UserSummaryDto.builder()
+    public static UserResponse toUserSummary(User user) {
+        return UserResponse.builder()
             .id(user.getId())
             .name(user.getName())
             .email(user.getEmail())
@@ -30,7 +22,7 @@ public class EntityMapper {
     }
 
     public static PoolResponse toPoolResponse(Pool pool) {
-        List<UserSummaryDto> members = pool.getMembers()
+        List<UserResponse> members = pool.getMembers()
             .stream()
             .sorted(Comparator.comparing(User::getId))
             .map(EntityMapper::toUserSummary)
