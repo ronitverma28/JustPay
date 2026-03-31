@@ -1,10 +1,9 @@
 package app.wallet.smart_wallet.controller;
 
-import com.smartwallet.dto.ApiResponse;
-import com.smartwallet.dto.CreateExpenseRequest;
-import com.smartwallet.dto.ExpenseResponse;
-import com.smartwallet.service.ExpenseService;
-import com.smartwallet.util.ApiResponseUtil;
+import app.wallet.smart_wallet.service.ExpenseService;
+import app.wallet.smart_wallet.dto.request.CreateExpenseRequest;
+import app.wallet.smart_wallet.dto.response.ExpenseResponse;
+import app.wallet.smart_wallet.util.ApiResponse;
 import jakarta.validation.Valid;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
@@ -28,12 +27,12 @@ public class ExpenseController {
     public ResponseEntity<ApiResponse<ExpenseResponse>> createExpense(@Valid @RequestBody CreateExpenseRequest request) {
         ExpenseResponse response = expenseService.createExpense(request);
         return ResponseEntity.status(HttpStatus.CREATED)
-            .body(ApiResponseUtil.success("Expense created successfully", response));
+                .body(ApiResponse.success("Expense created successfully", response));
     }
 
     @GetMapping("/pool/{poolId}")
     public ResponseEntity<ApiResponse<List<ExpenseResponse>>> getPoolExpenses(@PathVariable Long poolId) {
         List<ExpenseResponse> response = expenseService.getExpensesByPool(poolId);
-        return ResponseEntity.ok(ApiResponseUtil.success("Expenses fetched successfully", response));
+        return ResponseEntity.ok(ApiResponse.success("Expenses fetched successfully", response));
     }
 }

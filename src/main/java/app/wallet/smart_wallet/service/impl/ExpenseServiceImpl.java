@@ -14,6 +14,7 @@ import app.wallet.smart_wallet.exception.ForbiddenOperationException;
 import app.wallet.smart_wallet.exception.ResourceNotFoundException;
 import app.wallet.smart_wallet.repository.ExpenseRepository;
 import app.wallet.smart_wallet.repository.PoolRepository;
+import app.wallet.smart_wallet.service.ExpenseService;
 import app.wallet.smart_wallet.service.UserService;
 
 import java.math.BigDecimal;
@@ -33,7 +34,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
-public class ExpenseServiceImpl {
+public class ExpenseServiceImpl implements ExpenseService {
 
     private final ExpenseRepository expenseRepository;
     private final PoolRepository poolRepository;
@@ -68,7 +69,7 @@ public class ExpenseServiceImpl {
 
     @Transactional(readOnly = true)
     public List<ExpenseResponse> getExpensesByPool(Long poolId) {
-        User currentUser = userServiceImpl.getCurrentAuthenticatedUser();
+        User currentUser = userService.getCurrentAuthenticatedUser();
         Pool pool = poolRepository.findById(poolId)
             .orElseThrow(() -> new ResourceNotFoundException("Pool not found with id: " + poolId));
 

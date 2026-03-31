@@ -1,15 +1,14 @@
 package app.wallet.smart_wallet.controller;
 
-import com.smartwallet.dto.ApiResponse;
-import com.smartwallet.dto.ExpensePaymentRequest;
-import com.smartwallet.dto.ExpenseResponse;
-import com.smartwallet.dto.ManualPaymentRequest;
-import com.smartwallet.dto.RazorpayOrderRequest;
-import com.smartwallet.dto.RazorpayOrderResponse;
-import com.smartwallet.dto.RazorpayVerifyRequest;
-import com.smartwallet.dto.TransactionResponse;
-import com.smartwallet.service.PaymentService;
-import com.smartwallet.util.ApiResponseUtil;
+import app.wallet.smart_wallet.dto.request.ExpensePaymentRequest;
+import app.wallet.smart_wallet.dto.request.ManualPaymentRequest;
+import app.wallet.smart_wallet.dto.request.RazorpayVerifyRequest;
+import app.wallet.smart_wallet.dto.request.RazorpayOrderRequest;
+import app.wallet.smart_wallet.dto.response.RazorpayOrderResponse;
+import app.wallet.smart_wallet.dto.response.ExpenseResponse;
+import app.wallet.smart_wallet.dto.response.TransactionResponse;
+import app.wallet.smart_wallet.service.PaymentService;
+import app.wallet.smart_wallet.util.ApiResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
@@ -30,7 +29,7 @@ public class PaymentController {
     @PostMapping("/razorpay/order")
     public ResponseEntity<ApiResponse<RazorpayOrderResponse>> createOrder(@Valid @RequestBody RazorpayOrderRequest request) {
         RazorpayOrderResponse response = paymentService.createRazorpayOrder(request);
-        return ResponseEntity.ok(ApiResponseUtil.success("Razorpay order created", response));
+        return ResponseEntity.ok(ApiResponse.success("Razorpay order created", response));
     }
 
     @PostMapping("/razorpay/verify")
@@ -38,7 +37,7 @@ public class PaymentController {
         @Valid @RequestBody RazorpayVerifyRequest request
     ) {
         TransactionResponse response = paymentService.verifyRazorpayPayment(request);
-        return ResponseEntity.ok(ApiResponseUtil.success("Payment verified and wallet updated", response));
+        return ResponseEntity.ok(ApiResponse.success("Payment verified and wallet updated", response));
     }
 
     @PostMapping(value = "/razorpay/webhook", consumes = MediaType.APPLICATION_JSON_VALUE)
@@ -47,18 +46,18 @@ public class PaymentController {
         @RequestHeader("X-Razorpay-Signature") String signature
     ) {
         String response = paymentService.handleRazorpayWebhook(payload, signature);
-        return ResponseEntity.ok(ApiResponseUtil.success("Webhook accepted", response));
+        return ResponseEntity.ok(ApiResponse.success("Webhook accepted", response));
     }
 
     @PostMapping("/expense/pay")
     public ResponseEntity<ApiResponse<ExpenseResponse>> payExpense(@Valid @RequestBody ExpensePaymentRequest request) {
         ExpenseResponse response = paymentService.payExpenseFromPool(request);
-        return ResponseEntity.ok(ApiResponseUtil.success("Expense paid successfully", response));
+        return ResponseEntity.ok(ApiResponse.success("Expense paid successfully", response));
     }
 
     @PostMapping("/manual")
     public ResponseEntity<ApiResponse<ExpenseResponse>> manualPayment(@Valid @RequestBody ManualPaymentRequest request) {
         ExpenseResponse response = paymentService.markExpensePaidManually(request);
-        return ResponseEntity.ok(ApiResponseUtil.success("Expense marked as paid manually", response));
+        return ResponseEntity.ok(ApiResponse.success("Expense marked as paid manually", response));
     }
 }

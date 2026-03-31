@@ -12,6 +12,7 @@ import app.wallet.smart_wallet.repository.PoolRepository;
 import java.math.BigDecimal;
 import java.util.HashSet;
 
+import app.wallet.smart_wallet.service.PoolService;
 import app.wallet.smart_wallet.util.EntityMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -19,7 +20,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
-public class PoolServiceImpl {
+public class PoolServiceImpl implements PoolService {
 
     private final PoolRepository poolRepository;
     private final UserServiceImpl userServiceImpl;

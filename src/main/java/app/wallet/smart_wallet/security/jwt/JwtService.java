@@ -5,13 +5,13 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
-import java.nio.charset.StandardCharsets;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
 import javax.crypto.SecretKey;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
@@ -19,7 +19,10 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class JwtService {
 
-    private final JwtProperties jwtProperties;
+    @Value("${jwt.secret.key}")
+    private String sceret;
+    @Value("${jwt.expiration}")
+    private int expirationTime;
 
     public String extractUsername(String token) {
         return extractClaim(token, Claims::getSubject);
@@ -37,12 +40,12 @@ public class JwtService {
     }
 
     public String generateToken(Map<String, Object> extraClaims, UserDetails userDetails) {
-        long now = System.currentTimeMillis();
+
         return Jwts.builder()
             .claims(extraClaims)
             .subject(userDetails.getUsername())
-            .issuedAt(new Date(now))
-            .expiration(new Date(now + jwtProperties.getExpirationMs()))
+            .issuedAt(new Date())
+            .expiration(new Date(new Date().getTime()+ expirationTime))
             .signWith(getSignInKey())
             .compact();
     }
@@ -65,13 +68,6 @@ public class JwtService {
     }
 
     private SecretKey getSignInKey() {
-        String secret = jwtProperties.getSecret();
-
-        try {
-            byte[] keyBytes = Decoders.BASE64.decode(secret);
-            return Keys.hmacShaKeyFor(keyBytes);
-        } catch (IllegalArgumentException ex) {
-            return Keys.hmacShaKeyFor(secret.getBytes(StandardCharsets.UTF_8));
-        }
+        return Keys.hmacShaKeyFor(Decoders.BASE64URL.decode(sceret));
     }
 }

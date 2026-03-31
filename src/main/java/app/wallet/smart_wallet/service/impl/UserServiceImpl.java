@@ -4,6 +4,7 @@ import app.wallet.smart_wallet.entity.User;
 import app.wallet.smart_wallet.exception.BadRequestException;
 import app.wallet.smart_wallet.exception.ResourceNotFoundException;
 import app.wallet.smart_wallet.repository.UserRepository;
+import app.wallet.smart_wallet.service.UserService;
 import app.wallet.smart_wallet.util.SecurityUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -11,7 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
-public class UserServiceImpl {
+public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
 

@@ -1,9 +1,8 @@
 package app.wallet.smart_wallet.controller;
 
-import com.smartwallet.dto.ApiResponse;
-import com.smartwallet.dto.TransactionResponse;
-import com.smartwallet.service.TransactionService;
-import com.smartwallet.util.ApiResponseUtil;
+import app.wallet.smart_wallet.dto.response.TransactionResponse;
+import app.wallet.smart_wallet.service.TransactionService;
+import app.wallet.smart_wallet.util.ApiResponse;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -21,6 +20,6 @@ public class TransactionController {
     @GetMapping
     public ResponseEntity<ApiResponse<List<TransactionResponse>>> getTransactions() {
         List<TransactionResponse> response = transactionService.getMyTransactions();
-        return ResponseEntity.ok(ApiResponseUtil.success("Transactions fetched successfully", response));
+        return ResponseEntity.ok(ApiResponse.success("Transactions fetched successfully", response));
     }
 }

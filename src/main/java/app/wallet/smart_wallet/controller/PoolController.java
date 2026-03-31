@@ -1,11 +1,10 @@
 package app.wallet.smart_wallet.controller;
 
-import com.smartwallet.dto.AddMemberRequest;
-import com.smartwallet.dto.ApiResponse;
-import com.smartwallet.dto.CreatePoolRequest;
-import com.smartwallet.dto.PoolResponse;
-import com.smartwallet.service.PoolService;
-import com.smartwallet.util.ApiResponseUtil;
+import app.wallet.smart_wallet.dto.request.AddMemberRequest;
+import app.wallet.smart_wallet.dto.request.CreatePoolRequest;
+import app.wallet.smart_wallet.dto.response.PoolResponse;
+import app.wallet.smart_wallet.service.PoolService;
+import app.wallet.smart_wallet.util.ApiResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -29,9 +28,8 @@ public class PoolController {
     @PostMapping
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<ApiResponse<PoolResponse>> createPool(@Valid @RequestBody CreatePoolRequest request) {
-        PoolResponse response = poolService.createPool(request);
         return ResponseEntity.status(HttpStatus.CREATED)
-            .body(ApiResponseUtil.success("Pool created successfully", response));
+            .body(ApiResponse.success("Pool created successfully", poolService.createPool(request)));
     }
 
     @PostMapping("/{id}/members")
@@ -41,7 +39,7 @@ public class PoolController {
         @Valid @RequestBody AddMemberRequest request
     ) {
         PoolResponse response = poolService.addMember(poolId, request.getUserId());
-        return ResponseEntity.ok(ApiResponseUtil.success("Member added successfully", response));
+        return ResponseEntity.ok(ApiResponse.success("Member added successfully", response));
     }
 
     @DeleteMapping("/{id}/members/{userId}")
@@ -51,12 +49,12 @@ public class PoolController {
         @PathVariable Long userId
     ) {
         PoolResponse response = poolService.removeMember(poolId, userId);
-        return ResponseEntity.ok(ApiResponseUtil.success("Member removed successfully", response));
+        return ResponseEntity.ok(ApiResponse.success("Member removed successfully", response));
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<ApiResponse<PoolResponse>> getPoolDetails(@PathVariable("id") Long poolId) {
         PoolResponse response = poolService.getPoolDetails(poolId);
-        return ResponseEntity.ok(ApiResponseUtil.success("Pool details fetched", response));
+        return ResponseEntity.ok(ApiResponse.success("Pool details fetched", response));
     }
 }

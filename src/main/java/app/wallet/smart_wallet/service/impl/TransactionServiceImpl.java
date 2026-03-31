@@ -7,6 +7,7 @@ import app.wallet.smart_wallet.entity.User;
 import app.wallet.smart_wallet.entity.enums.TransactionStatus;
 import app.wallet.smart_wallet.entity.enums.TransactionType;
 import app.wallet.smart_wallet.repository.TransactionRepository;
+import app.wallet.smart_wallet.service.TransactionService;
 import app.wallet.smart_wallet.service.UserService;
 import app.wallet.smart_wallet.util.EntityMapper;
 import java.math.BigDecimal;
@@ -18,7 +19,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
-public class TransactionServiceImpl {
+public class TransactionServiceImpl implements TransactionService {
 
     private final TransactionRepository transactionRepository;
     private final UserService userService;

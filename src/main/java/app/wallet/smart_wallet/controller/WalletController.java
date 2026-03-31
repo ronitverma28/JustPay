@@ -1,10 +1,9 @@
 package app.wallet.smart_wallet.controller;
 
-import com.smartwallet.dto.AddMoneyRequest;
-import com.smartwallet.dto.ApiResponse;
-import com.smartwallet.dto.WalletResponse;
-import com.smartwallet.service.WalletService;
-import com.smartwallet.util.ApiResponseUtil;
+import app.wallet.smart_wallet.dto.request.AddMoneyRequest;
+import app.wallet.smart_wallet.dto.response.WalletResponse;
+import app.wallet.smart_wallet.service.WalletService;
+import app.wallet.smart_wallet.util.ApiResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -24,12 +23,12 @@ public class WalletController {
     @GetMapping
     public ResponseEntity<ApiResponse<WalletResponse>> getWallet() {
         WalletResponse response = walletService.getCurrentWallet();
-        return ResponseEntity.ok(ApiResponseUtil.success("Wallet fetched successfully", response));
+        return ResponseEntity.ok(ApiResponse.success("Wallet fetched successfully", response));
     }
 
     @PostMapping("/add-money")
     public ResponseEntity<ApiResponse<WalletResponse>> addMoney(@Valid @RequestBody AddMoneyRequest request) {
         WalletResponse response = walletService.addMoney(request);
-        return ResponseEntity.ok(ApiResponseUtil.success("Wallet credited successfully", response));
+        return ResponseEntity.ok(ApiResponse.success("Wallet credited successfully", response));
     }
 }

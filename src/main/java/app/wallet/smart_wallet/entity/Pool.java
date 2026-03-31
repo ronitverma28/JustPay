@@ -41,7 +41,7 @@ public class Pool {
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "created_by", nullable = false)
-    private User user;
+    private User createdBy;
 
     @Builder.Default
     @ManyToMany

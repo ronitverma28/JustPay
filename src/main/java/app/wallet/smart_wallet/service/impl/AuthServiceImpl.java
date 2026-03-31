@@ -11,6 +11,7 @@ import app.wallet.smart_wallet.exception.BadRequestException;
 import app.wallet.smart_wallet.repository.UserRepository;
 import app.wallet.smart_wallet.repository.WalletRepository;
 import app.wallet.smart_wallet.security.jwt.JwtService;
+import app.wallet.smart_wallet.service.AuthService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -21,7 +22,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
-public class AuthServiceImpl {
+public class AuthServiceImpl implements AuthService {
 
     private final UserRepository userRepository;
     private final WalletRepository walletRepository;

@@ -1,12 +1,10 @@
 package app.wallet.smart_wallet.controller;
 
+import app.wallet.smart_wallet.dto.request.LoginRequest;
+import app.wallet.smart_wallet.dto.request.UserRequest;
+import app.wallet.smart_wallet.dto.response.AuthResponse;
 import app.wallet.smart_wallet.service.AuthService;
-import com.smartwallet.dto.ApiResponse;
-import com.smartwallet.dto.AuthResponse;
-import com.smartwallet.dto.LoginRequest;
-import com.smartwallet.dto.RegisterRequest;
-import com.smartwallet.service.AuthService;
-import com.smartwallet.util.ApiResponseUtil;
+import app.wallet.smart_wallet.util.ApiResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -24,15 +22,14 @@ public class AuthController {
     private final AuthService authService;
 
     @PostMapping("/register")
-    public ResponseEntity<ApiResponse<AuthResponse>> register(@Valid @RequestBody RegisterRequest request) {
-        AuthResponse response = authService.register(request);
+    public ResponseEntity<ApiResponse<AuthResponse>> register(@Valid @RequestBody UserRequest userRequest) {
+        AuthResponse response = authService.register(userRequest);
         return ResponseEntity.status(HttpStatus.CREATED)
-            .body(ApiResponseUtil.success("User registered successfully", response));
+            .body(ApiResponse.success("User registered successfully", response));
     }
 
     @PostMapping("/login")
-    public ResponseEntity<ApiResponse<AuthResponse>> login(@Valid @RequestBody LoginRequest request) {
-        AuthResponse response = authService.login(request);
-        return ResponseEntity.ok(ApiResponseUtil.success("Login successful", response));
+    public ResponseEntity<ApiResponse<AuthResponse>> login(@Valid @RequestBody LoginRequest loginRequest) {
+        return ResponseEntity.ok(ApiResponse.success("Login successful", authService.login(loginRequest)));
     }
 }

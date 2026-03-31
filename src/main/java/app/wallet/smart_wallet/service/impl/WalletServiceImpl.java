@@ -12,6 +12,7 @@ import app.wallet.smart_wallet.exception.ForbiddenOperationException;
 import app.wallet.smart_wallet.exception.ResourceNotFoundException;
 import app.wallet.smart_wallet.repository.PoolRepository;
 import app.wallet.smart_wallet.repository.WalletRepository;
+import app.wallet.smart_wallet.service.WalletService;
 import app.wallet.smart_wallet.util.EntityMapper;
 import java.util.UUID;
 import lombok.RequiredArgsConstructor;
@@ -20,7 +21,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
-public class WalletServiceImpl {
+public class WalletServiceImpl implements WalletService {
 
     private final WalletRepository walletRepository;
     private final PoolRepository poolRepository;

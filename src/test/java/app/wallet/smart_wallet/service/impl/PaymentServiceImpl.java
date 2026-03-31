@@ -28,12 +28,15 @@ import java.util.Map;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
-import com.jayway.jsonpath.internal.Utils;
-import jakarta.persistence.criteria.Order;
+import com.razorpay.Order;
+import com.razorpay.RazorpayClient;
+import com.razorpay.RazorpayException;
+import com.razorpay.Utils;
 import lombok.RequiredArgsConstructor;
 import org.json.JSONObject;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
 
 @Service
 @RequiredArgsConstructor
@@ -78,7 +81,7 @@ public class PaymentServiceImpl {
             options.put("receipt", "receipt_" + UUID.randomUUID().toString().replace("-", ""));
 
             Order order = razorpayClient.orders.create(options);
-            String orderId = order.get("id");
+            String orderId = order.get("id").toString();
 
             Transaction transaction = Transaction.builder()
                 .user(currentUser)
